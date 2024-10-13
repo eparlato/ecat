@@ -1,10 +1,6 @@
 require "application"
 
 RSpec.describe Application do
-  it("works") do
-    expect(Application.new().works?).to eq(true)
-  end
-
   context "when exec is called with a file path" do
     it "prints file's content to Application's output" do
       output = StringIO.new
