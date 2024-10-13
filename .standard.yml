@@ -1,0 +1,2 @@
+ignore:
+  - spec/spec_helper.rb

@@ -1,5 +1,4 @@
 class Application
-
   def initialize(output = $stdout)
     @output = output
   end
@@ -10,5 +9,4 @@ class Application
       @output.puts line
     end
   end
-
 end

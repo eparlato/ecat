@@ -18,11 +18,10 @@ RSpec.describe Application do
         "While children are struggling to be unique, the world around them is trying all means to make them look like everybody else."
         "These Capitalists Generally Act Harmoniously And In Concert, To Fleece The People."
       OUTPUT
-      
+
       application.exec("asset/test.txt")
 
-      expect(output.string.strip).to eq(expected_output.strip) 
+      expect(output.string.strip).to eq(expected_output.strip)
     end
   end
-    
 end
