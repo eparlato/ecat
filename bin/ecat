@@ -2,4 +2,4 @@
 
 require_relative "../lib/application"
 
-Application.new.exec
+Application.new.exec(ARGV[0])
