@@ -8,5 +8,7 @@ class Application
     file.each_line do |line|
       @output.puts line
     end
+
+    file.close
   end
 end
