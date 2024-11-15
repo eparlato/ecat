@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
 require_relative "../lib/application"
+require_relative "../lib/file_input"
 
-Application.new(ARGV[0]).exec()
+Application.new(FileInput.new(ARGV[0])).exec()

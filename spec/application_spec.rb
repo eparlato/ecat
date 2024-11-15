@@ -1,11 +1,13 @@
 require "application"
+require "file_input"
 
 RSpec.describe Application do
   context "when the input is a file" do
     it "prints file's content to Application's output" do
+      input = FileInput.new("asset/test.txt")
       output = StringIO.new
 
-      application = Application.new("asset/test.txt", output)
+      application = Application.new(input, output)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -20,7 +22,7 @@ RSpec.describe Application do
         "These Capitalists Generally Act Harmoniously And In Concert, To Fleece The People."
       OUTPUT
 
-      application.exec()
+      application.exec
 
       expect(output.string.strip).to eq(expected_output.strip)
     end
