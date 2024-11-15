@@ -1,7 +1,7 @@
 require "application"
 
 RSpec.describe Application do
-  context "when exec is called with a file path" do
+  context "when the input is a file" do
     it "prints file's content to Application's output" do
       output = StringIO.new
 
