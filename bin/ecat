@@ -2,5 +2,10 @@
 
 require_relative "../lib/application"
 require_relative "../lib/file_input"
+require_relative "../lib/txt_stream_input"
 
-Application.new(FileInput.new(ARGV[0])).exec()
+if ARGV.empty?
+  Application.new(TxtStreamInput.new(STDIN)).exec()
+else
+  Application.new(FileInput.new(ARGV[0])).exec()
+end

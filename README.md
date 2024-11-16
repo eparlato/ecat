@@ -19,3 +19,12 @@ Open the file specified on the command line and write its contents to standard o
 "Every strike brings me closer to the next home run."
 "Definiteness of purpose is the starting point of all achievement."
 ```
+
+## Step 2
+
+Read the input from from standard in
+
+```bash
+% head -n1 test.txt | cccat -
+"Life isn’t about getting and having, it’s about giving and being."
+```

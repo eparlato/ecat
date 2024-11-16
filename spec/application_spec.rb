@@ -1,5 +1,6 @@
 require "application"
 require "file_input"
+require "txt_stream_input"
 
 RSpec.describe Application do
   context "when the input is a file" do
@@ -25,6 +26,19 @@ RSpec.describe Application do
       application.exec
 
       expect(output.string.strip).to eq(expected_output.strip)
+    end
+  end
+
+  context "when the input is STDIN" do
+    it "prints the input to Application's output" do
+      input = TxtStreamInput.new(StringIO.new("Hello World!\nSecond Line\n"))
+      output = StringIO.new
+
+      application = Application.new(input, output)
+
+      application.exec
+
+      expect(output.string.strip).to eq("Hello World!\nSecond Line")
     end
   end
 end
