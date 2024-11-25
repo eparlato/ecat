@@ -1,7 +1,4 @@
-require "input_switch"
-require "file_input"
-
-RSpec.describe "InputSwitch" do
+RSpec.describe InputSwitch do
   context "when ARGV is empty" do
     it "returns a TxtStreamInput instance" do
       inputSwitch = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n"))

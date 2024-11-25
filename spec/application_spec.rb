@@ -1,7 +1,5 @@
-require "application"
-require "file_input"
-require "txt_stream_input"
-require "input_switch"
+require_relative "../lib/application"
+require_relative "../lib/input_switch"
 
 RSpec.describe Application do
   context "when the input is a file" do
