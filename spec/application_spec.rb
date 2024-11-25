@@ -29,7 +29,7 @@ RSpec.describe Application do
     end
   end
 
-  context "when the input is STDIN" do
+  context "when the input is an IO" do
     it "prints the input to Application's output" do
       input = TxtStreamInput.new(StringIO.new("Hello World!\nSecond Line\n"))
       output = StringIO.new
