@@ -1,14 +1,15 @@
 require "application"
 require "file_input"
 require "txt_stream_input"
+require "input_switch"
 
 RSpec.describe Application do
   context "when the input is a file" do
     it "prints file's content to Application's output" do
-      input = FileInput.new("asset/test.txt")
+      inputSwitch = InputSwitch.new(["asset/test.txt"])
       output = StringIO.new
 
-      application = Application.new(input, output)
+      application = Application.new(inputSwitch, output)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -31,10 +32,10 @@ RSpec.describe Application do
 
   context "when the input is an IO" do
     it "prints the input to Application's output" do
-      input = TxtStreamInput.new(StringIO.new("Hello World!\nSecond Line\n"))
+      inputSwitch = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n"))
       output = StringIO.new
 
-      application = Application.new(input, output)
+      application = Application.new(inputSwitch, output)
 
       application.exec
 

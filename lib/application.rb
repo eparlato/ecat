@@ -1,6 +1,8 @@
+require_relative 'input_switch'
+
 class Application
-  def initialize(input, output = $stdout)
-    @input = input
+  def initialize(inputSwitch, output = $stdout)
+    @input = inputSwitch.input_stream
     @output = output
   end
 

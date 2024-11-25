@@ -1,4 +1,5 @@
-require "txt_stream_input"
+require_relative "txt_stream_input"
+require_relative "file_input"
 
 class InputSwitch
 def initialize(argv, ioStream = STDIN)
