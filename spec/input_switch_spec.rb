@@ -3,7 +3,7 @@ RSpec.describe InputSwitch do
     it "returns a TxtStreamInput instance" do
       input_switch = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n"))
 
-      expect(input_switch.input_stream).to be_instance_of(TxtStreamInput)
+      expect(input_switch.select_input_source).to be_instance_of(TxtStreamInput)
     end
   end
 
@@ -11,7 +11,7 @@ RSpec.describe InputSwitch do
     it "returns a FileInput instance" do
       input_switch = InputSwitch.new(["asset/test.txt"], StringIO.new("Hello World!\nSecond Line\n"))
 
-      expect(input_switch.input_stream).to be_instance_of(FileInput)
+      expect(input_switch.select_input_source).to be_instance_of(FileInput)
     end
   end
 end

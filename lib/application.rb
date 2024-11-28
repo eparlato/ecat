@@ -1,18 +1,18 @@
 require_relative "input_switch"
 
 class Application
-  def initialize(input_switch, output = $stdout)
-    @input = input_switch.input_stream
+  def initialize(input_source, output = $stdout)
+    @input_source = input_source
     @output = output
   end
 
   def exec
-    input_stream = @input.open
+    input_stream = @input_source.open
 
     input_stream.each_line do |line|
       @output.puts line
     end
 
-    @input.close
+    @input_source.close
   end
 end

@@ -4,10 +4,10 @@ require_relative "../lib/input_switch"
 RSpec.describe Application do
   context "when the input is a file" do
     it "prints file's content to Application's output" do
-      input_switch = InputSwitch.new(["asset/test.txt"])
+      input_source = InputSwitch.new(["asset/test.txt"]).select_input_source
       output = StringIO.new
 
-      application = Application.new(input_switch, output)
+      application = Application.new(input_source, output)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -30,10 +30,10 @@ RSpec.describe Application do
 
   context "when the input is an IO" do
     it "prints the input to Application's output" do
-      input_switch = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n"))
+      input_source = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n")).select_input_source
       output = StringIO.new
 
-      application = Application.new(input_switch, output)
+      application = Application.new(input_source, output)
 
       application.exec
 

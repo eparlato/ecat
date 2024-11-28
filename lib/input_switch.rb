@@ -7,7 +7,7 @@ class InputSwitch
     @io_stream = io_stream
   end
 
-  def input_stream
+  def select_input_source
     if @argv.empty?
       TxtStreamInput.new(@io_stream)
     else
