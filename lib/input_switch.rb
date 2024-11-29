@@ -7,11 +7,15 @@ class InputSwitch
     @io_stream = io_stream
   end
 
-  def select_input_source
+  def select_input_sources
+    input_sources = []
+
     if @argv.empty?
-      TxtStreamInput.new(@io_stream)
+      input_sources << TxtStreamInput.new(@io_stream)
     else
-      FileInput.new(@argv.first)
+      @argv.each { |arg| input_sources << FileInput.new(arg) }
     end
+
+    input_sources
   end
 end

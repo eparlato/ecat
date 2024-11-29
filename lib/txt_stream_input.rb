@@ -1,10 +1,10 @@
 class TxtStreamInput
-  def initialize(stdin)
-    @stdin = stdin
+  def initialize(io_stream)
+    @io_stream = io_stream
   end
 
   def open
-    @stdin
+    @io_stream
   end
 
   def close

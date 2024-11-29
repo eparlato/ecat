@@ -2,5 +2,5 @@
 
 require_relative "../lib/application"
 
-input_source = InputSwitch.new(ARGV).select_input_source
-Application.new(input_source).exec
+input_sources = InputSwitch.new(ARGV).select_input_sources
+Application.new(input_sources).exec
