@@ -56,3 +56,22 @@ Concatenate files. You can test your program like this:
 "An unexamined life is not worth living."
 "Eighty percent of success is showing up."
 ```
+
+## Step 4
+
+In this step your goal is to number the lines as they’re printed out, that should look like this:
+
+```bash
+% head -n3 test.txt | cccat -n
+1  "Life isn’t about getting and having, it’s about giving and being."
+2  "Whatever the mind of man can conceive and believe, it can achieve."
+3  "Strive not to be a success, but rather to be of value."
+```
+
+Free free not to use head, I’m just keeping the example short.
+
+## TODO
+
+Inside Application, an array of FormatOption objects might be injected.
+FormatOption is an interface (we don't have interfaces in Ruby, but it's just an idea), a first implementation is NumberLinesFormatOption.
+NumberLinesFormatOption is a decorator. It wraps the output and adds a line number to each one of its lines.
