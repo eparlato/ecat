@@ -7,7 +7,7 @@ RSpec.describe Application do
       input_sources = InputSwitch.new(["asset/test.txt"]).select_input_sources
       output = StringIO.new
 
-      application = Application.new(input_sources, output)
+      application = Application.new(input_sources, ConsoleOutput.new(output))
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."

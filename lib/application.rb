@@ -1,7 +1,7 @@
-require_relative "input_switch"
+require_relative "console_output"
 
 class Application
-  def initialize(input_sources, output = $stdout)
+  def initialize(input_sources, output = ConsoleOutput.new)
     @input_source = input_sources
     @output = output
   end
