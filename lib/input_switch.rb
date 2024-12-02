@@ -1,5 +1,5 @@
-require_relative "txt_stream_input"
-require_relative "file_input"
+require_relative "txt_stream_source"
+require_relative "file_source"
 
 class InputSwitch
   def initialize(argv, io_stream = $stdin)
@@ -11,9 +11,9 @@ class InputSwitch
     input_sources = []
 
     if @argv.empty?
-      input_sources << TxtStreamInput.new(@io_stream)
+      input_sources << TxtStreamSource.new(@io_stream)
     else
-      @argv.each { |arg| input_sources << FileInput.new(arg) }
+      @argv.each { |arg| input_sources << FileSource.new(arg) }
     end
 
     input_sources

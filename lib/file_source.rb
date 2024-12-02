@@ -1,4 +1,4 @@
-class FileInput
+class FileSource
   def initialize(file_path)
     @file_path = file_path
   end
@@ -7,7 +7,7 @@ class FileInput
     @file = File.open(@file_path, "r")
 
     @file.each_line do |line|
-      output.puts line
+      output.print line
     end
 
     @file.close

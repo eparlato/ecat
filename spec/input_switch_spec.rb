@@ -7,7 +7,7 @@ RSpec.describe InputSwitch do
 
       input_sources = input_switch.select_input_sources
 
-      expect(input_sources.first).to be_instance_of(TxtStreamInput)
+      expect(input_sources.first).to be_instance_of(TxtStreamSource)
     end
   end
 
@@ -17,7 +17,7 @@ RSpec.describe InputSwitch do
 
       input_sources = input_switch.select_input_sources
 
-      expect(input_sources.first).to be_instance_of(FileInput)
+      expect(input_sources.first).to be_instance_of(FileSource)
     end
   end
 end
