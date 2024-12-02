@@ -3,11 +3,13 @@ class FileInput
     @file_path = file_path
   end
 
-  def open
+  def print_to(output)
     @file = File.open(@file_path, "r")
-  end
 
-  def close
+    @file.each_line do |line|
+      output.puts line
+    end
+
     @file.close
   end
 end
