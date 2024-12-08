@@ -1,13 +1,12 @@
-require_relative "../lib/application"
-require_relative "../lib/input_switch"
+require_relative "../lib/ecat"
 
-RSpec.describe Application do
+RSpec.describe Ecat do
   context "when the input is a file" do
     it "prints file's content to Application's output" do
-      input_sources = InputSwitch.new(["asset/test.txt"]).select_input_sources
+      argv = ["asset/test.txt"]
       output = StringIO.new
 
-      application = Application.new(input_sources, ConsoleOutput.new(output))
+      ecat = Ecat.new(argv:, output:)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -22,7 +21,7 @@ RSpec.describe Application do
         "These Capitalists Generally Act Harmoniously And In Concert, To Fleece The People."
       OUTPUT
 
-      application.exec
+      ecat.run
 
       expect(output.string.strip).to eq(expected_output.strip)
     end
@@ -30,10 +29,10 @@ RSpec.describe Application do
 
   context "when the input are multiple files" do
     it "concatenates all files' content and print it to Application's output" do
-      input_sources = InputSwitch.new(["asset/test.txt", "asset/test2.txt"]).select_input_sources
+      argv = ["asset/test.txt", "asset/test2.txt"]
       output = StringIO.new
 
-      application = Application.new(input_sources, output)
+      ecat = Ecat.new(argv:, output:)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -58,7 +57,7 @@ RSpec.describe Application do
         "The less of the World, the freer you live."
       OUTPUT
 
-      application.exec
+      ecat.run
 
       expect(output.string.strip).to eq(expected_output.strip)
     end
@@ -66,12 +65,13 @@ RSpec.describe Application do
 
   context "when the input is an IO" do
     it "prints the input to Application's output" do
-      input_sources = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n")).select_input_sources
+      argv = []
+      input = StringIO.new("Hello World!\nSecond Line\n")
       output = StringIO.new
 
-      application = Application.new(input_sources, output)
+      ecat = Ecat.new(argv:, input:, output:)
 
-      application.exec
+      ecat.run
 
       expect(output.string.strip).to eq("Hello World!\nSecond Line")
     end

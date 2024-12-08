@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/application"
-require_relative "../lib/input_switch"
+require_relative "../lib/ecat"
 
-input_sources = InputSwitch.new(ARGV).select_input_sources
-Application.new(input_sources).exec
+Ecat.new(argv: ARGV).run
