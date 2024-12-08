@@ -3,13 +3,11 @@ class FileSource
     @file_path = file_path
   end
 
-  def print_to(output)
+  def open
     @file = File.open(@file_path, "r")
+  end
 
-    @file.each_line do |line|
-      output.print line
-    end
-
+  def close
     @file.close
   end
 end

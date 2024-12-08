@@ -8,7 +8,13 @@ class Application
 
   def exec
     @input_source.each do |source|
-      source.print_to(@output)
+      content = source.open
+
+      content.each_line do |line|
+        @output.print line
+      end
+
+      source.close
     end
   end
 end
