@@ -3,7 +3,9 @@ class ConsoleOutput
     @output_stream = output_stream
   end
 
-  def print(message)
-    @output_stream.puts message
+  def print(content)
+    content.each_line do |line|
+      @output_stream.puts line
+    end
   end
 end

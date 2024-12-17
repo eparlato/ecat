@@ -10,9 +10,7 @@ class Application
     @input_source.each do |source|
       content = source.open
 
-      content.each_line do |line|
-        @output.print line
-      end
+      @output.print content
 
       source.close
     end
