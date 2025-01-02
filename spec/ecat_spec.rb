@@ -63,6 +63,32 @@ RSpec.describe Ecat do
     end
   end
 
+  context "when arguments holds a -n option" do
+    it "numbers all output lines" do
+      arguments = ["-n", "asset/test.txt"]
+      output = StringIO.new
+
+      ecat = Ecat.new(arguments:, output:)
+
+      expected_output = <<~OUTPUT
+        1  "Your heart is the size of an ocean. Go find yourself in its hidden depths."
+        2  "The Bay of Bengal is hit frequently by cyclones. The months of November and May, in particular, are dangerous in this regard."
+        3  "Thinking is the capital, Enterprise is the way, Hard Work is the solution."
+        4  "If You Can'T Make It Good, At Least Make It Look Good."
+        5  "Heart be brave. If you cannot be brave, just go. Love's glory is not a small thing."
+        6  "It is bad for a young man to sin; but it is worse for an old man to sin."
+        7  "If You Are Out To Describe The Truth, Leave Elegance To The Tailor."
+        8  "O man you are busy working for the world, and the world is busy trying to turn you out."
+        9  "While children are struggling to be unique, the world around them is trying all means to make them look like everybody else."
+        10  "These Capitalists Generally Act Harmoniously And In Concert, To Fleece The People."
+      OUTPUT
+
+      ecat.run
+
+      expect(output.string.strip).to eq(expected_output.strip)
+    end
+  end
+
   context "when the input is a stream of text" do
     it "prints the input to output" do
       arguments = []

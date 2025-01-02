@@ -7,7 +7,7 @@ RSpec.describe InputSwitch do
 
       context "and input holds a StringIO instance" do
         let(:input) { StringIO.new("Hello World!\nSecond Line\n") }
-        
+
         it "input_sources has a TxtStreamSource instance" do
           input_switch = InputSwitch.new(arguments, input)
 
@@ -24,7 +24,6 @@ RSpec.describe InputSwitch do
 
         expect(input_switch.output).to be_instance_of(ConsoleOutput)
       end
-
     end
 
     context "when there is one argument with a file path" do
@@ -48,6 +47,30 @@ RSpec.describe InputSwitch do
         input_switch.exec
 
         expect(input_switch.output).to be_instance_of(ConsoleOutput)
+      end
+    end
+
+    context "when there's one argument with -n" do
+      let(:arguments) { ["-n"] }
+
+      context "and input holds a StringIO instance" do
+        let(:input) { StringIO.new("Hello World!\nSecond Line\n") }
+
+        it "input_sources has a FileSource instance" do
+          input_switch = InputSwitch.new(arguments, input)
+
+          input_switch.exec
+
+          expect(input_switch.input_sources.first).to be_instance_of(TxtStreamSource)
+        end
+      end
+
+      it "output is a LineNumberOutput instance" do
+        input_switch = InputSwitch.new(arguments)
+
+        input_switch.exec
+
+        expect(input_switch.output).to be_instance_of(LineNumberOutput)
       end
     end
   end
