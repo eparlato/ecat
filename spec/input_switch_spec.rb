@@ -16,9 +16,18 @@ RSpec.describe InputSwitch do
           expect(input_switch.input_sources.first).to be_instance_of(TxtStreamSource)
         end
       end
+
+      it "output is a ConsoleOutput instance" do
+        input_switch = InputSwitch.new(arguments)
+
+        input_switch.exec
+
+        expect(input_switch.output).to be_instance_of(ConsoleOutput)
+      end
+
     end
 
-    context "when there is one argument" do
+    context "when there is one argument with a file path" do
       let(:arguments) { ["asset/test.txt"] }
 
       context "and input holds a StringIO instance" do
@@ -31,6 +40,14 @@ RSpec.describe InputSwitch do
 
           expect(input_switch.input_sources.first).to be_instance_of(FileSource)
         end
+      end
+
+      it "output is a ConsoleOutput instance" do
+        input_switch = InputSwitch.new(arguments)
+
+        input_switch.exec
+
+        expect(input_switch.output).to be_instance_of(ConsoleOutput)
       end
     end
   end

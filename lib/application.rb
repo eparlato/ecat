@@ -1,7 +1,7 @@
 require_relative "console_output"
 
 class Application
-  def initialize(input_sources, output = ConsoleOutput.new)
+  def initialize(input_sources, output)
     @input_source = input_sources
     @output = output
   end

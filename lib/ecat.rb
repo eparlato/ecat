@@ -9,8 +9,8 @@ class Ecat
   end
 
   def run
-    input_switch = InputSwitch.new(@arguments, @input)
+    input_switch = InputSwitch.new(@arguments, @input, @output)
     input_switch.exec
-    Application.new(input_switch.input_sources, ConsoleOutput.new(@output)).exec
+    Application.new(input_switch.input_sources, input_switch.output).exec
   end
 end

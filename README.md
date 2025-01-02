@@ -72,6 +72,4 @@ Free free not to use head, I’m just keeping the example short.
 
 ## TODO
 
-Inside Application, an array of FormatOption objects might be injected.
-FormatOption is an interface (we don't have interfaces in Ruby, but it's just an idea), a first implementation is NumberLinesFormatOption.
-NumberLinesFormatOption is a decorator. It wraps the output and adds a line number to each one of its lines.
+Rename InputSwitch to something that implies also the output
