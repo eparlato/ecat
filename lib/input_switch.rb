@@ -17,10 +17,20 @@ class InputSwitch
     @input_sources = []
 
     if @arguments.empty?
+      if @input_stream.eof?
+        @output = ConsoleOutput.new(@output_stream)
+        return
+      end
+
       @input_sources << TxtStreamSource.new(@input_stream)
       @output = ConsoleOutput.new(@output_stream)
     elsif @arguments.size == 1 && @arguments.first == "-n"
-      @input_sources << TxtStreamSource.new(@input_stream)
+      if @input_stream.eof?
+        @input_sources = []
+      else
+        @input_sources << TxtStreamSource.new(@input_stream)
+      end
+
       @output = LineNumberOutput.new(@output_stream)
     else
       @arguments.each do |arg|
