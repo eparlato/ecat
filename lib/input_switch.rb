@@ -14,35 +14,49 @@ class InputSwitch
   end
 
   def exec
-    @input_sources = []
+    @input_sources = select_input_sources
+    @output = select_output
+  end
 
-    if @arguments.empty?
-      if @input_stream.eof?
-        @output = ConsoleOutput.new(@output_stream)
-        return
-      end
+  private
 
-      @input_sources << TxtStreamSource.new(@input_stream)
-      @output = ConsoleOutput.new(@output_stream)
-    elsif @arguments.size == 1 && @arguments.first == "-n"
-      if @input_stream.eof?
-        @input_sources = []
-      else
-        @input_sources << TxtStreamSource.new(@input_stream)
-      end
+  def select_input_sources
+    input_sources = []
 
-      @output = LineNumberOutput.new(@output_stream)
-    else
+    if !@arguments.empty?
       @arguments.each do |arg|
-        if arg == "-n"
-          @output = LineNumberOutput.new(@output_stream)
-          next
+        if arg != "-n"
+          input_sources << FileSource.new(arg)
         end
-
-        @input_sources << FileSource.new(arg)
       end
-
-      @output ||= ConsoleOutput.new(@output_stream)
     end
+
+    if has_data?(@input_stream)
+      input_sources << TxtStreamSource.new(@input_stream)
+    end
+
+    input_sources
+  end
+
+  def has_data?(stream)
+    if stream.equal?($stdin)
+      return stream.stat.pipe? && !stream.eof?
+    end
+
+    stream.size > 0
+  end
+
+  def select_output
+    @arguments.each do |arg|
+      if line_number_option?(arg)
+        return LineNumberOutput.new(@output_stream)
+      end
+    end
+
+    ConsoleOutput.new(@output_stream)
+  end
+
+  def line_number_option?(text)
+    text == "-n"
   end
 end

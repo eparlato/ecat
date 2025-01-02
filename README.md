@@ -74,6 +74,4 @@ Free free not to use head, I’m just keeping the example short.
 
 Rename InputSwitch to something that implies also the output
 
-Refactor InputSwitch
-
 Should InputSwitch be put inside Application? Why using InputSwitch#exec inside Ecat?
