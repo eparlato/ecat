@@ -25,7 +25,7 @@ class InputOutputSwitch
 
     if !@arguments.empty?
       @arguments.each do |arg|
-        if arg != "-n"
+        if !line_number_option?(arg)
           input_sources << FileSource.new(arg)
         end
       end
