@@ -3,10 +3,10 @@ require_relative "../lib/ecat"
 RSpec.describe Ecat do
   context "when the input is a file" do
     it "prints file's content to Application's output" do
-      argv = ["asset/test.txt"]
+      arguments = ["asset/test.txt"]
       output = StringIO.new
 
-      ecat = Ecat.new(argv:, output:)
+      ecat = Ecat.new(arguments:, output:)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -29,10 +29,10 @@ RSpec.describe Ecat do
 
   context "when the input are multiple files" do
     it "concatenates all files' content and print it to Application's output" do
-      argv = ["asset/test.txt", "asset/test2.txt"]
+      arguments = ["asset/test.txt", "asset/test2.txt"]
       output = StringIO.new
 
-      ecat = Ecat.new(argv:, output:)
+      ecat = Ecat.new(arguments:, output:)
 
       expected_output = <<~OUTPUT
         "Your heart is the size of an ocean. Go find yourself in its hidden depths."
@@ -65,11 +65,11 @@ RSpec.describe Ecat do
 
   context "when the input is an IO" do
     it "prints the input to Application's output" do
-      argv = []
+      arguments = []
       input = StringIO.new("Hello World!\nSecond Line\n")
       output = StringIO.new
 
-      ecat = Ecat.new(argv:, input:, output:)
+      ecat = Ecat.new(arguments:, input:, output:)
 
       ecat.run
 

@@ -2,9 +2,9 @@ require_relative "input_switch"
 require_relative "application"
 
 class Ecat
-  def initialize(argv: [], input: $stdin, output: $stdout)
-    @arguments = argv
+  def initialize(input: $stdin, arguments: [], output: $stdout)
     @input = input
+    @arguments = arguments
     @output = output
   end
 
