@@ -1,16 +1,20 @@
 require_relative "console_output"
 
 class Application
-  def initialize(input_sources, output)
-    @input_source = input_sources
-    @output = output
+  def initialize(input_output_switch)
+    @input_output_switch = input_output_switch
   end
 
   def exec
-    @input_source.each do |source|
+    @input_output_switch.exec
+
+    input_source = @input_output_switch.input_sources
+    output = @input_output_switch.output
+
+    input_source.each do |source|
       content = source.open
 
-      @output.print content
+      output.print content
 
       source.close
     end

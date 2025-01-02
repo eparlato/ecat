@@ -72,4 +72,4 @@ Free free not to use head, I’m just keeping the example short.
 
 ## TODO
 
-Should InputSwitch be put inside Application? Why using InputSwitch#exec inside Ecat?
+Should the app wait fo input just like cat does, if launched without input nor params?
