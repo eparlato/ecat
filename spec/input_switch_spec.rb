@@ -1,6 +1,6 @@
-require_relative "../lib/input_switch"
+require_relative "../lib/input_output_switch"
 
-RSpec.describe InputSwitch do
+RSpec.describe InputOutputSwitch do
   context "#exec" do
     context "when there are no arguments" do
       let(:arguments) { [] }
@@ -9,36 +9,36 @@ RSpec.describe InputSwitch do
         let(:input_stream) { StringIO.new("Hello World!\nSecond Line\n") }
 
         it "input_sources has a TxtStreamSource instance" do
-          input_switch = InputSwitch.new(arguments, input_stream)
+          input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.input_sources.first).to be_instance_of(TxtStreamSource)
+          expect(input_output_switch.input_sources.first).to be_instance_of(TxtStreamSource)
         end
 
         it "output is a ConsoleOutput instance" do
-          input_switch = InputSwitch.new(arguments, StringIO.new(""))
+          input_output_switch = InputOutputSwitch.new(arguments, StringIO.new(""))
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(ConsoleOutput)
+          expect(input_output_switch.output).to be_instance_of(ConsoleOutput)
         end
       end
 
       context "and input_stream is empty" do
         let(:input) { StringIO.new("") }
-        let(:input_switch) { InputSwitch.new(arguments, input) }
+        let(:input_output_switch) { InputOutputSwitch.new(arguments, input) }
 
         it "input_sources is empty" do
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.input_sources).to eq([])
+          expect(input_output_switch.input_sources).to eq([])
         end
 
         it "output is a ConsoleOutput instance" do
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(ConsoleOutput)
+          expect(input_output_switch.output).to be_instance_of(ConsoleOutput)
         end
       end
     end
@@ -51,31 +51,31 @@ RSpec.describe InputSwitch do
           let(:input_stream) { StringIO.new("Hello World!\nSecond Line\n") }
 
           it "input_sources has a FileSource instance" do
-            input_switch = InputSwitch.new(arguments, input_stream)
+            input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-            input_switch.exec
+            input_output_switch.exec
 
-            expect(input_switch.input_sources.first).to be_instance_of(TxtStreamSource)
+            expect(input_output_switch.input_sources.first).to be_instance_of(TxtStreamSource)
           end
         end
 
         context "and input_stream is empty" do
           let(:input_stream) { StringIO.new("") }
-          let(:input_switch) { InputSwitch.new(arguments, input_stream) }
+          let(:input_output_switch) { InputOutputSwitch.new(arguments, input_stream) }
 
           it "input_sources is empty" do
-            input_switch.exec
+            input_output_switch.exec
 
-            expect(input_switch.input_sources).to eq([])
+            expect(input_output_switch.input_sources).to eq([])
           end
         end
 
         it "output is a LineNumberOutput instance" do
-          input_switch = InputSwitch.new(arguments, StringIO.new(""))
+          input_output_switch = InputOutputSwitch.new(arguments, StringIO.new(""))
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(LineNumberOutput)
+          expect(input_output_switch.output).to be_instance_of(LineNumberOutput)
         end
       end
 
@@ -86,11 +86,11 @@ RSpec.describe InputSwitch do
           let(:input_stream) { StringIO.new("Hello World!\nSecond Line\n") }
 
           it "input_sources has a FileSource instance" do
-            input_switch = InputSwitch.new(arguments, input_stream)
+            input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-            input_switch.exec
+            input_output_switch.exec
 
-            expect(input_switch.input_sources.first).to be_instance_of(FileSource)
+            expect(input_output_switch.input_sources.first).to be_instance_of(FileSource)
           end
         end
 
@@ -98,20 +98,20 @@ RSpec.describe InputSwitch do
           let(:input) { StringIO.new("") }
 
           it "input_sources has a FileSource instance" do
-            input_switch = InputSwitch.new(arguments, input)
+            input_output_switch = InputOutputSwitch.new(arguments, input)
 
-            input_switch.exec
+            input_output_switch.exec
 
-            expect(input_switch.input_sources.first).to be_instance_of(FileSource)
+            expect(input_output_switch.input_sources.first).to be_instance_of(FileSource)
           end
         end
 
         it "output is a ConsoleOutput instance" do
-          input_switch = InputSwitch.new(arguments, StringIO.new(""))
+          input_output_switch = InputOutputSwitch.new(arguments, StringIO.new(""))
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(ConsoleOutput)
+          expect(input_output_switch.output).to be_instance_of(ConsoleOutput)
         end
       end
     end
@@ -123,21 +123,21 @@ RSpec.describe InputSwitch do
         let(:arguments) { ["asset/test.txt", "asset/test2.txt"] }
 
         it "input_sources has multiple FileSource instances" do
-          input_switch = InputSwitch.new(arguments, input_stream)
+          input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.input_sources.size).to eq(2)
-          expect(input_switch.input_sources.first).to be_instance_of(FileSource)
-          expect(input_switch.input_sources.last).to be_instance_of(FileSource)
+          expect(input_output_switch.input_sources.size).to eq(2)
+          expect(input_output_switch.input_sources.first).to be_instance_of(FileSource)
+          expect(input_output_switch.input_sources.last).to be_instance_of(FileSource)
         end
 
         it "output is a ConsoleOutput instance" do
-          input_switch = InputSwitch.new(arguments, input_stream)
+          input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(ConsoleOutput)
+          expect(input_output_switch.output).to be_instance_of(ConsoleOutput)
         end
       end
 
@@ -145,21 +145,21 @@ RSpec.describe InputSwitch do
         let(:arguments) { ["asset/test.txt", "-n", "asset/test2.txt"] }
 
         it "input_sources has multiple FileSource instances" do
-          input_switch = InputSwitch.new(arguments, input_stream)
+          input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.input_sources.size).to eq(2)
-          expect(input_switch.input_sources.first).to be_instance_of(FileSource)
-          expect(input_switch.input_sources.last).to be_instance_of(FileSource)
+          expect(input_output_switch.input_sources.size).to eq(2)
+          expect(input_output_switch.input_sources.first).to be_instance_of(FileSource)
+          expect(input_output_switch.input_sources.last).to be_instance_of(FileSource)
         end
 
         it "output is a LineNumberOutput instance" do
-          input_switch = InputSwitch.new(arguments, input_stream)
+          input_output_switch = InputOutputSwitch.new(arguments, input_stream)
 
-          input_switch.exec
+          input_output_switch.exec
 
-          expect(input_switch.output).to be_instance_of(LineNumberOutput)
+          expect(input_output_switch.output).to be_instance_of(LineNumberOutput)
         end
       end
     end

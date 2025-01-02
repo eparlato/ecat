@@ -3,7 +3,7 @@ require_relative "file_source"
 require_relative "console_output"
 require_relative "line_number_output"
 
-class InputSwitch
+class InputOutputSwitch
   attr_reader :input_sources
   attr_reader :output
 

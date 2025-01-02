@@ -1,4 +1,4 @@
-require_relative "input_switch"
+require_relative "input_output_switch"
 require_relative "application"
 
 class Ecat
@@ -9,8 +9,8 @@ class Ecat
   end
 
   def run
-    input_switch = InputSwitch.new(@arguments, @input, @output)
-    input_switch.exec
-    Application.new(input_switch.input_sources, input_switch.output).exec
+    input_output_switch = InputOutputSwitch.new(@arguments, @input, @output)
+    input_output_switch.exec
+    Application.new(input_output_switch.input_sources, input_output_switch.output).exec
   end
 end
