@@ -3,13 +3,14 @@ require_relative "application"
 
 class Ecat
   def initialize(argv: [], input: $stdin, output: $stdout)
-    @argv = argv
+    @arguments = argv
     @input = input
     @output = output
   end
 
   def run
-    input_sources = InputSwitch.new(@argv, @input).select_input_sources
-    Application.new(input_sources, ConsoleOutput.new(@output)).exec
+    input_switch = InputSwitch.new(@arguments, @input)
+    input_switch.exec
+    Application.new(input_switch.input_sources, ConsoleOutput.new(@output)).exec
   end
 end

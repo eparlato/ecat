@@ -2,20 +2,20 @@ require_relative "txt_stream_source"
 require_relative "file_source"
 
 class InputSwitch
-  def initialize(argv, io_stream = $stdin)
-    @argv = argv
+  attr_reader :input_sources
+
+  def initialize(arguments, io_stream = $stdin)
+    @arguments = arguments
     @io_stream = io_stream
   end
 
-  def select_input_sources
-    input_sources = []
+  def exec
+    @input_sources = []
 
-    if @argv.empty?
-      input_sources << TxtStreamSource.new(@io_stream)
+    if @arguments.empty?
+      @input_sources << TxtStreamSource.new(@io_stream)
     else
-      @argv.each { |arg| input_sources << FileSource.new(arg) }
+      @arguments.each { |arg| @input_sources << FileSource.new(arg) }
     end
-
-    input_sources
   end
 end

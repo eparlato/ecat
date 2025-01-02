@@ -1,23 +1,37 @@
 require_relative "../lib/input_switch"
 
 RSpec.describe InputSwitch do
-  context "when ARGV is empty" do
-    it "returns an array with a TxtStreamInput instance" do
-      input_switch = InputSwitch.new([], StringIO.new("Hello World!\nSecond Line\n"))
+  context "#exec" do
+    context "when there are no arguments" do
+      let(:arguments) { [] }
 
-      input_sources = input_switch.select_input_sources
+      context "and input holds a StringIO instance" do
+        let(:input) { StringIO.new("Hello World!\nSecond Line\n") }
+        
+        it "input_sources has a TxtStreamSource instance" do
+          input_switch = InputSwitch.new(arguments, input)
 
-      expect(input_sources.first).to be_instance_of(TxtStreamSource)
+          input_switch.exec
+
+          expect(input_switch.input_sources.first).to be_instance_of(TxtStreamSource)
+        end
+      end
     end
-  end
 
-  context "when ARGV has one argument" do
-    it "returns an array with a single FileInput instance" do
-      input_switch = InputSwitch.new(["asset/test.txt"], StringIO.new("Hello World!\nSecond Line\n"))
+    context "when there is one argument" do
+      let(:arguments) { ["asset/test.txt"] }
 
-      input_sources = input_switch.select_input_sources
+      context "and input holds a StringIO instance" do
+        let(:input) { StringIO.new("Hello World!\nSecond Line\n") }
 
-      expect(input_sources.first).to be_instance_of(FileSource)
+        it "input_sources has a FileSource instance" do
+          input_switch = InputSwitch.new(arguments, input)
+
+          input_switch.exec
+
+          expect(input_switch.input_sources.first).to be_instance_of(FileSource)
+        end
+      end
     end
   end
 end
