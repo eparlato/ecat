@@ -70,6 +70,33 @@ In this step your goal is to number the lines as they’re printed out, that sho
 
 Free free not to use head, I’m just keeping the example short.
 
+## Step 5
+
+In this step your goal is to number lines, both including and excluding non-blank lines, here’s a couple of test cases:
+
+```bash
+% sed G test.txt | cccat -n | head -n4
+1  "Life isn’t about getting and having, it’s about giving and being."
+2
+3  "Whatever the mind of man can conceive and believe, it can achieve."
+4
+```
+
+and:
+
+```bash
+% sed G test.txt | cccat -b | head -n5
+ 1  "Life isn’t about getting and having, it’s about giving and being."
+
+ 2  "Whatever the mind of man can conceive and believe, it can achieve."
+
+ 3  "Strive not to be a success, but rather to be of value."
+```
+
+Here we’ve used sed G to add extra blank lines.
+
 ## TODO
+
+Rename `input_switch_spec.rb` to `input_output_switch_spec.rb`
 
 Should the app wait fo input just like cat does, if launched without input nor params?
