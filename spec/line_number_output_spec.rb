@@ -1,6 +1,6 @@
 require_relative "../lib/line_number_output"
 
-RSpec.describe LineNumberOutput do
+RSpec.describe "LineNumberOutput#print" do
   it "prints the output to the console with line numbers" do
     output_io = StringIO.new
     output = LineNumberOutput.new(output_io)

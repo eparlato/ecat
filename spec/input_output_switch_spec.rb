@@ -224,18 +224,18 @@ RSpec.describe InputOutputSwitch do
 
           it "input_sources has multiple FileSource instances" do
             input_output_switch = InputOutputSwitch.new(arguments, input_stream)
-  
+
             input_output_switch.exec
-  
+
             expect(input_output_switch.input_sources.size).to eq(1)
             expect(input_output_switch.input_sources.first).to be_instance_of(FileSource)
           end
 
           it "output is a NotBlankLineNumberOutput instance" do
             input_output_switch = InputOutputSwitch.new(arguments, input_stream)
-  
+
             input_output_switch.exec
-  
+
             expect(input_output_switch.output).to be_instance_of(NotBlankLineNumberOutput)
           end
         end

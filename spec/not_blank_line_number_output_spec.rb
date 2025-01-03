@@ -9,7 +9,7 @@ RSpec.describe "NotBlankLineNumberOutput#print" do
         "The Bay of Bengal is hit frequently by cyclones. The months of November and May, in particular, are dangerous in this regard."
       CONTENT
     end
-    
+
     it "prints line number and content of non-blank lines only" do
       output_stream = StringIO.new
       not_blank_line_number_output = NotBlankLineNumberOutput.new(output_stream)
@@ -19,7 +19,7 @@ RSpec.describe "NotBlankLineNumberOutput#print" do
         
         2  "The Bay of Bengal is hit frequently by cyclones. The months of November and May, in particular, are dangerous in this regard."
       OUTPUT
-    
+
       not_blank_line_number_output.print(content)
 
       expect(output_stream.string.strip).to eq(expected_output.strip)
