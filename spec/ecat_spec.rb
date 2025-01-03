@@ -90,7 +90,7 @@ RSpec.describe Ecat do
   end
 
   context "when arguments holds a -b option" do
-    xit "numbers non-empty output lines" do
+    it "numbers non-empty output lines" do
       arguments = ["-b", "asset/test_with_blank_lines.txt"]
       output = StringIO.new
 
