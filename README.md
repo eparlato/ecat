@@ -97,6 +97,4 @@ Here we’ve used sed G to add extra blank lines.
 
 ## TODO
 
-Rename `input_switch_spec.rb` to `input_output_switch_spec.rb`
-
 Should the app wait fo input just like cat does, if launched without input nor params?

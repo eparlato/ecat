@@ -2,6 +2,7 @@ require_relative "txt_stream_source"
 require_relative "file_source"
 require_relative "console_output"
 require_relative "line_number_output"
+require_relative "not_blank_line_number_output"
 
 class InputOutputSwitch
   attr_reader :input_sources
@@ -25,9 +26,10 @@ class InputOutputSwitch
 
     if !@arguments.empty?
       @arguments.each do |arg|
-        if !line_number_option?(arg)
-          input_sources << FileSource.new(arg)
+        if line_number_option?(arg) || not_blank_line_number_option?(arg)
+          next
         end
+        input_sources << FileSource.new(arg)
       end
     end
 
@@ -47,10 +49,12 @@ class InputOutputSwitch
   end
 
   def select_output
-    @arguments.each do |arg|
-      if line_number_option?(arg)
-        return LineNumberOutput.new(@output_stream)
-      end
+    if @arguments.any? { |arg| arg == "-b" }
+      return NotBlankLineNumberOutput.new(@output_stream)
+    end
+
+    if @arguments.any? { |arg| arg == "-n" }
+      return LineNumberOutput.new(@output_stream)
     end
 
     ConsoleOutput.new(@output_stream)
@@ -58,5 +62,9 @@ class InputOutputSwitch
 
   def line_number_option?(text)
     text == "-n"
+  end
+
+  def not_blank_line_number_option?(text)
+    text == "-b"
   end
 end
